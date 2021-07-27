@@ -1,0 +1,35 @@
+body{
+    background-color: #F29A56;
+    text-align: center;
+}
+
+h1{
+    font-family: 'teko', sans-serif;
+    font-size: 7rem;
+    margin-top: 10px;
+    color: #DAF7A6;
+    margin-bottom: 10px;
+}
+
+.blocks{
+    margin: 0 auto;
+    height: 30rem;
+    width: 30rem;
+    background-color: #DAF7A6;
+    border-radius: 5%;
+}
+
+.block{
+    height: 10rem;
+    width: 10rem;
+}
+
+.blue{
+    background-color: #5DADE2 ;
+    margin-left: 3rem;
+}
+
+.red{
+    background-color: #900C3F;
+    margin-right: 3rem;
+}
