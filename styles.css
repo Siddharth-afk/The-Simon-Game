@@ -36,6 +36,11 @@ table{
     border: 3px black solid;
 }
 
+button{
+    border: 0px;
+    background-color: #DAF7A6;
+}
+
 .blue{
     background-color: #5DADE2 ;
 }
