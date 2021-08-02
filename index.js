@@ -1,40 +1,53 @@
+
 var gamepattern = [];
-var count = 0;
+var userpattern = [];
 var buttonColours  = ["green", "red", "brown", "blue"];
-var randomColourChoosen;
 var sad = new Audio("sounds/sad_truth.mp3");
+var level = 0;
+var count = 0;
 
-$(document).keypress((i) =>{
-    if (i.key == "Enter"){
-        start();
+var button = $("div.block");
+var started = false;
+$(document).keypress(()=>{
+    nextSequence();
+    started = true;
+})
+
+button.click((i)=>{
+    var colorClicked = i.target["id"];
+    flash(colorClicked);
+    playAudio(colorClicked);
+    userpattern.push(colorClicked);
+    check(userpattern.length-1)
+    console.log(userpattern);
+})
+
+
+function check(currentlevel){
+    if(gamepattern[currentlevel] === userpattern[currentlevel]){
+        if(userpattern.length === gamepattern.length){
+            console.log("correct");
+            setTimeout(() => {
+                nextSequence();
+            }, 1000);
+        }
     }
-});
-
-function start(){
-    count++;
-    var i = 0;
-    $("h1").text("Level " + count);
-    randomColourChoosen = buttonColours[nextSequence()];
-    flash(randomColourChoosen);
-    gamepattern.push(randomColourChoosen);
-    console.log(gamepattern);
-
-    for(i = 0; i < gamepattern.length; i++){      
-        $("div.block").click((event) => {
-            var target;
-            target = event.target["id"];
-            if(check(target, gamepattern, i-1)){
-                start();
-            }
-        });
+    else{
+        var ran = Math.floor(Math.random() * 4);
+        $("h1").text("You lost! Better luck next time");
+        if(ran === 1){
+            sad.play();
+        }
+        else{
+            playAudio("wrong");
+        }
+        setTimeout(() =>{
+            location.reload();
+        }, 5000)
     }
 }
 
-function nextSequence(){
-    var random_number = Math.floor(Math.random() * 4);
-    return random_number;
-}
-
+//This works
 function flash(i){
     $("#" + i).fadeOut(300, () => {
         $("#" + i).fadeIn(100);
@@ -46,10 +59,14 @@ function playAudio(i){
     audio.play();
 }
 
-function check(event, gamepattern, pos){
-    if(event == gamepattern[pos]){
-        flash(event);
-        playAudio(event);
-        return true;
-    }
+function nextSequence(){
+    userpattern = [];
+    level++;
+    $("h1").text("level " + level);
+    var random_number = Math.floor(Math.random() * 4);
+    var randomChosenColour = buttonColours[random_number];
+    gamepattern.push(randomChosenColour);
+    console.log(gamepattern);
+
+    flash(randomChosenColour);
 }

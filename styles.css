@@ -41,6 +41,10 @@ button{
     background-color: #DAF7A6;
 }
 
+.pressed{
+    background-color: white;
+}
+
 .blue{
     background-color: #5DADE2 ;
 }
