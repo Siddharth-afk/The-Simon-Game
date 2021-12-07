@@ -35,12 +35,13 @@ function check(currentlevel){
     else{
         var ran = Math.floor(Math.random() * 4);
         $("h1").text("You lost! Better luck next time");
-        if(ran === 1){
+        playAudio("wrong");
+        /*if(ran === 1){
             sad.play();
         }
         else{
             playAudio("wrong");
-        }
+        }*/
         setTimeout(() =>{
             location.reload();
         }, 5000)
